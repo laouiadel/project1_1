@@ -1,0 +1,44 @@
+# Look fabric-samples/first-network/docker-compose-cli.yaml for more details
+version: '2'
+
+networks:
+  MyNetwork:
+
+services:
+
+  orderer.org1.dz:
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: orderer.org1.dz
+    container_name: orderer.org1.dz
+    networks:
+      - MyNetwork
+
+  peer0.org1.dz:
+    container_name: peer0.org1.dz
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.org1.dz
+    networks:
+      - MyNetwork
+  peer1.org1.dz:
+    container_name: peer1.org1.dz
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.org1.dz
+    networks:
+      - MyNetwork
+  peer2.org1.dz:
+    container_name: peer2.org1.dz
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer2.org1.dz
+    networks:
+      - MyNetwork
+  peer3.org1.dz:
+    container_name: peer3.org1.dz
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer3.org1.dz
+    networks:
+      - MyNetwork

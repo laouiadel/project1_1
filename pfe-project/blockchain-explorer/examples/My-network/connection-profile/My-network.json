@@ -1,0 +1,101 @@
+{
+	"name": "My-network",
+	"version": "1.0.0",
+	"license": "Apache-2.0",
+	"client": {
+		"tlsEnable": true,
+		"adminUser": "admin",
+		"adminPassword": "adminpw",
+		"enableAuthentication": false,
+		"organization": "Organisation1",
+		"connection": {
+			"timeout": {
+				"peer": {
+					"endorser": "300"
+				},
+				"orderer": "300"
+			}
+		}
+	},
+	"channels": {
+		"firstchannel": {
+			"peers": {
+			    "peer0.org1.dz": {},
+			    "peer1.org1.dz": {},
+			    "peer2.org1.dz": {}
+			    
+			},
+			"connection": {
+				"timeout": {
+					"peer": {
+						"endorser": "6000",
+						"eventHub": "6000",
+						"eventReg": "6000"
+					}
+				}
+			}
+		},
+	        "secondchannel": {
+			"peers": {
+			    "peer0.org1.dz": {},
+			    "peer1.org1.dz": {},
+			    "peer2.org1.dz": {}
+			},
+			"connection": {
+				"timeout": {
+					"peer": {
+						"endorser": "6000",
+						"eventHub": "6000",
+						"eventReg": "6000"
+					}
+				}
+			}
+		}
+	},
+	"organizations": {
+		"Organisation1": {
+			"mspid": "PeerOrg1MSP",
+			"fullpath": true,
+			"adminPrivateKey": {
+				"path": "/tmp/crypto/peerOrganizations/org1.dz/users/Admin@org1.dz/msp/keystore/c271e49566f16e9d626fe75ae33e96f09981d861aa8d9ae90b1d290eb70300a7_sk"
+			},
+			"signedCert": {
+				"path": "/tmp/crypto/peerOrganizations/org1.dz/users/Admin@org1.dz/msp/signcerts/Admin@org1.dz-cert.pem"
+			}
+		}
+	},
+	"peers": {
+		"peer0.org1.dz": {
+			"tlsCACerts": {
+				"path": "/tmp/crypto/peerOrganizations/org1.dz/peers/peer0.org1.dz/tls/ca.crt"
+			},
+			"url": "grpcs://peer0.org1.dz:7051",
+			"eventUrl": "grpcs://peer0.org1.dz:7053",
+			"grpcOptions": {
+				"ssl-target-name-override": "peer0.org1.dz"
+			}
+				},
+		"peer1.org1.dz": {
+			"tlsCACerts": {
+				"path": "/tmp/crypto/peerOrganizations/org1.dz/peers/peer1.org1.dz/tls/ca.crt"
+			},
+			"url": "grpcs://peer1.org1.dz:8051",
+			"eventUrl": "grpcs://peer1.org1.dz:8053",
+			"grpcOptions": {
+				"ssl-target-name-override": "peer1.org1.dz"
+			}
+			},
+		"peer2.org1.dz": {
+			"tlsCACerts": {
+				"path": "/tmp/crypto/peerOrganizations/org1.dz/peers/peer2.org1.dz/tls/ca.crt"
+			},
+			"url": "grpcs://peer2.org1.dz:9051",
+			"eventUrl": "grpcs://peer2.org1.dz:9053",
+			"grpcOptions": {
+				"ssl-target-name-override": "peer2.org1.dz"
+			}
+			}
+
+		}
+	
+}

@@ -1,0 +1,104 @@
+version: '2'
+
+services:
+
+  orderer.org1.dz:
+    container_name: orderer.org1.dz
+    image: hyperledger/fabric-orderer
+    environment:
+      - FABRIC_LOGGING_SPEC=INFO
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=OrdererOrg1MSP
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      # enabled TLS
+      - ORDERER_GENERAL_TLS_ENABLED=true
+      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      # - ORDERER_KAFKA_TOPIC_REPLICATIONFACTOR=1
+      - ORDERER_OPERATIONS_LISTENADDRESS=0.0.0.0:8443  # operation RESTful API
+      - ORDERER_METRICS_PROVIDER=prometheus  # prometheus will pull metrics from orderer via /met
+      # - ORDERER_KAFKA_VERBOSE=true
+      - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+    working_dir: /opt/working-dir/src/hyperledger/fabric/orderer
+    command: orderer
+    volumes:
+        - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - ../crypto-config/ordererOrganizations/org1.dz/orderers/orderer.org1.dz/msp:/var/hyperledger/orderer/msp
+        - ../crypto-config/ordererOrganizations/org1.dz/orderers/orderer.org1.dz/tls/:/var/hyperledger/orderer/tls
+        - ../shared-folder:/etc/shared-folder
+        # - orderer1.org1.dz:/var/hyperledger/production/orderer
+    ports:
+      - 7050:7050
+      - 8443:8443
+  peer0.org1.dz:
+    container_name: peer0.org1.dz
+    image: hyperledger/fabric-peer
+    environment:
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_MyNetwork # i really don't know what is this???
+      - CORE_PEER_ID=peer0.org1.dz
+      - CORE_PEER_ADDRESS=peer0.org1.dz:7051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
+      - CORE_PEER_CHAINCODEADDRESS=peer0.org1.dz:7052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.org1.dz:8051 #;peer2.org1.dz:9051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.dz:7051
+      - CORE_PEER_LOCALMSPID=PeerOrg1MSP
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      - CORE_PEER_GOSSIP_ORGLEADER=false
+      # - CORE_PEER_PROFILE_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+    working_dir: /opt/working-dir/src/hyperledger/fabric/peer
+
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../shared-folder:/etc/shared-folder
+        - ../crypto-config/peerOrganizations/org1.dz/peers/peer0.org1.dz/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/org1.dz/peers/peer0.org1.dz/tls:/etc/hyperledger/fabric/tls
+        # - peer0.org1.dz:/var/hyperledger/production
+    ports:
+      - 7051:7051
+    command: peer node start
+  peer1.org1.dz:
+    container_name: peer1.org1.dz
+    image: hyperledger/fabric-peer
+    environment:
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_MyNetwork # i really don't know what is this???
+      - CORE_PEER_ID=peer1.org1.dz
+      - CORE_PEER_ADDRESS=peer1.org1.dz:8051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:8051
+      - CORE_PEER_CHAINCODEADDRESS=peer1.org1.dz:8052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:8052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org1.dz:8051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org1.dz:7051 #;peer2.org1.dz:9051
+      - CORE_PEER_LOCALMSPID=PeerOrg1MSP
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_GOSSIP_USELEADERELECTION=true
+      - CORE_PEER_GOSSIP_ORGLEADER=false
+      # - CORE_PEER_PROFILE_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+    working_dir: /opt/working-dir/src/hyperledger/fabric/peer 
+
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../shared-folder:/etc/shared-folder
+        - ../crypto-config/peerOrganizations/org1.dz/peers/peer1.org1.dz/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/org1.dz/peers/peer1.org1.dz/tls:/etc/hyperledger/fabric/tls
+        # - peer1.org1.example.com:/var/hyperledger/production
+
+    ports:
+      - 8051:8051
+    command: peer node start
+
+ 

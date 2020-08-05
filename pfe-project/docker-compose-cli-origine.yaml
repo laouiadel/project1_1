@@ -1,0 +1,69 @@
+# Look fabric-samples/first-network/docker-compose-cli.yaml for more details
+version: '2'
+
+networks:
+  MyNetwork:
+
+services:
+
+  orderer.org1.dz:
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: orderer.org1.dz
+    container_name: orderer.org1.dz
+    networks:
+      - MyNetwork
+
+  peer0.org1.dz:
+    container_name: peer0.org1.dz
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.org1.dz
+    networks:
+      - MyNetwork
+
+  peer1.org1.dz:
+    container_name: peer1.org1.dz
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.org1.dz
+    networks:
+      - MyNetwork
+
+
+
+
+      # you can delete the cli section(in case you're using the sdk)
+      #  cli:
+      #    container_name: cli
+      #    image: hyperledger/fabric-tools
+      #    tty: true
+      #    stdin_open: true
+      #    environment:
+      #      - GOPATH=/opt/working-dir
+      #      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      #      #- FABRIC_LOGGING_SPEC=DEBUG
+      #      - FABRIC_LOGGING_SPEC=INFO
+      #      - CORE_PEER_ID=cli
+      #      - CORE_PEER_ADDRESS=peer0.org1.dz:7051
+      #      - CORE_PEER_LOCALMSPID=PeerOrg1MSP
+      #      - CORE_PEER_TLS_ENABLED=true
+      #      - CORE_PEER_TLS_CERT_FILE=/opt/working-dir/src/hyperledger/fabric/peer/crypto/peerOrganizations/org1.dz/peers/peer0.org1.dz/tls/server.crt
+      #      - CORE_PEER_TLS_KEY_FILE=/opt/working-dir/src/hyperledger/fabric/peer/crypto/peerOrganizations/org1.dz/peers/peer0.org1.dz/tls/server.key
+      #      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/working-dir/src/hyperledger/fabric/peer/crypto/peerOrganizations/org1.dz/peers/peer0.org1.dz/tls/ca.crt
+      #      - CORE_PEER_MSPCONFIGPATH=/opt/working-dir/src/hyperledger/fabric/peer/crypto/peerOrganizations/org1.dz/users/Admin@org1.dz/msp
+      #    working_dir: /opt/working-dir/src/hyperledger/fabric/peer 
+      #    command: /bin/bash
+      #    volumes:
+      #        - /var/run/:/host/var/run/
+      #        - ./shared-folder:/etc/shared-folder
+      #        - ./chaincode/:/opt/working-dir/src/chaincode
+      #        - ./crypto-config:/opt/working-dir/src/hyperledger/fabric/peer/crypto/
+      #        - ./scripts:/opt/working-dir/src/hyperledger/fabric/peer/scripts/
+      #        - ./channel-artifacts:/opt/working-dir/src/hyperledger/fabric/peer/channel-artifacts
+      #    depends_on:
+      #      - orderer.org1.dz
+      #      - peer0.org1.dz
+      #      - peer1.org1.dz
+      #    networks:
+      #      - MyNetwork

@@ -1,0 +1,164 @@
+{
+    "name": "My-network",
+    "description": "Sample network contains 2 peers (1 org), 1 orderer and 3 cas for Python SDK testing",
+    "version": "0.1",
+    "client": {
+	"organization": "Organisation1",
+	"credentialStore": {
+	    "path": "/tmp/hfc-kvs",
+	    "cryptoStore": {
+		"path": "/tmp/hfc-cvs"
+	    },
+	    "wallet": "wallet-name"
+	}
+    },
+    "organizations": {
+	"orderer.org1.dz": {
+	    "mspid": "OrdererOrg1MSP",
+	    "orderers": [
+		"orderer.org1.dz"
+	    ],
+	    "users": {
+		"Admin": {
+		    "cert": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/ordererOrganizations/org1.dz/users/Admin@org1.dz/msp/signcerts/Admin@org1.dz-cert.pem",
+          "private_key": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/ordererOrganizations/org1.dz/users/Admin@org1.dz/msp/keystore/d19cd9e29e8b083d9af8f910238d9c11ef0fc421903402e9ab816b7e519a32b9_sk"
+		}
+	    }
+	},
+	"org1.dz": {
+	    "mspid": "PeerOrg1MSP",
+	    "peers": 
+["peer0.org1.dz","peer1.org1.dz","peer2.org1.dz","peer3.org1.dz"],
+	    "certificateAuthorities": [
+		"ca.org1.dz"
+	    ],
+
+	    "users": {
+        "Admin": {
+	        "cert": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/Admin@org1.dz/msp/signcerts/Admin@org1.dz-cert.pem",
+		"private_key": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/Admin@org1.dz/msp/keystore/0a71620e0291ae019b86d9aed09be0449d528b45b0abbdefcfc1eddcaa23e75e_sk"
+		},
+        "User1": {
+                     "cert": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User1@org1.dz/msp/signcerts/User1@org1.dz-cert.pem",
+		     "private_key": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User1@org1.dz/msp/keystore/bf81a5a8183d66ad9feadb04697cf3d4a152283457a7cd251e3144946cb52722_sk"
+		},
+        "User2": {
+                     "cert": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User2@org1.dz/msp/signcerts/User2@org1.dz-cert.pem",
+		     "private_key": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User2@org1.dz/msp/keystore/6528e723e92f1548ebb0ecd74219a3ad174e7f1e6b7ca5b9ae4c9dec2c1fb61a_sk"
+		},
+        "User3": {
+                     "cert": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User3@org1.dz/msp/signcerts/User3@org1.dz-cert.pem",
+		     "private_key": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User3@org1.dz/msp/keystore/04e9e523966cdce33a9d52a7364878584db77bb78aa1e8a6920057dac4a22209_sk"
+		},
+        "User4": {
+                     "cert": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User4@org1.dz/msp/signcerts/User4@org1.dz-cert.pem",
+		     "private_key": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User4@org1.dz/msp/keystore/a50ec66b533d85fa179136b5957037c44341a30dd89435ee27da5f7f2e3df7bb_sk"
+		},
+        "User5": {
+                     "cert": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User5@org1.dz/msp/signcerts/User5@org1.dz-cert.pem",
+		     "private_key": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User5@org1.dz/msp/keystore/cb63d676e4034d2ea6f711f2fef6c9454e6db2f22a38d832d86e32411af49cff_sk"
+		},
+        "User6": {
+                     "cert": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User6@org1.dz/msp/signcerts/User6@org1.dz-cert.pem",
+		     "private_key": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User6@org1.dz/msp/keystore/a197d4f30c88a644d3ae9a0b820baeb89a09b6a0cc879dd817f0a33f246a72b8_sk"
+		},
+        "User7": {
+                     "cert": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User7@org1.dz/msp/signcerts/User7@org1.dz-cert.pem",
+		     "private_key": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User7@org1.dz/msp/keystore/95b75c9181202520f17d82e2b5d87f80a8659b596013e63ec9efcabfc1090c33_sk"
+		},
+        "User8": {
+                     "cert": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User8@org1.dz/msp/signcerts/User8@org1.dz-cert.pem",
+		     "private_key": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User8@org1.dz/msp/keystore/520545e1dc6ac1a1b94205c934719dbecc0157646c6d5c4a84020c8a1eadc81e_sk"
+		},
+        "User9": {
+                     "cert": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User9@org1.dz/msp/signcerts/User9@org1.dz-cert.pem",
+		     "private_key": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User9@org1.dz/msp/keystore/53da039e9bff2a9438618a888d569cb68bb5766f30f6840b53ac43b3be2bc644_sk"
+		},
+        "User10": {
+                     "cert": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User10@org1.dz/msp/signcerts/User10@org1.dz-cert.pem",
+		     "private_key": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User10@org1.dz/msp/keystore/78dad901c5b1f254b2c2f3da34144aedd0484e8513b842cc177fe994cfb95d43_sk"
+		},
+        "User11": {
+                     "cert": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User11@org1.dz/msp/signcerts/User11@org1.dz-cert.pem",
+		     "private_key": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User11@org1.dz/msp/keystore/475e74024b7a95f5aa496cadbdc91cdef9f0fde70204966a251d658c66e8a50d_sk"
+		},
+        "User12": {
+                     "cert": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User12@org1.dz/msp/signcerts/User12@org1.dz-cert.pem",
+		     "private_key": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/users/User12@org1.dz/msp/keystore/f3a48dd452c9620e4fe73cb79638dd1cb6bb6b8142b076a2e3ce5a49b150a6d8_sk"
+		}
+} 
+} 
+},
+    "orderers": {
+	"orderer.org1.dz": {
+	    "url": "localhost:7050",
+	    "grpcOptions": {
+		"grpc.ssl_target_name_override": "orderer.org1.dz",
+		"grpc-max-send-message-length": 15
+	    },
+	    "tlsCACerts": {
+		"path": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/ordererOrganizations/org1.dz/tlsca/tlsca.org1.dz-cert.pem"
+	    }
+	}
+    },
+    "peers": {
+    "peer0.org1.dz": {
+	      "url": "localhost:7051",
+	      "eventUrl": "localhost:7053",
+	      "grpcOptions": {
+      	        "grpc.ssl_target_name_override": "peer0.org1.dz",
+	        "grpc.http2.keepalive_time": 15
+	      },
+	      "tlsCACerts": {
+	        "path": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/peers/peer0.org1.dz/msp/tlscacerts/tlsca.org1.dz-cert.pem"
+}},
+    "peer1.org1.dz": {
+	      "url": "localhost:8051",
+	      "eventUrl": "localhost:8053",
+	      "grpcOptions": {
+      	        "grpc.ssl_target_name_override": "peer1.org1.dz",
+	        "grpc.http2.keepalive_time": 15
+	      },
+	      "tlsCACerts": {
+	        "path": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/peers/peer1.org1.dz/msp/tlscacerts/tlsca.org1.dz-cert.pem"
+}},
+    "peer2.org1.dz": {
+	      "url": "localhost:9051",
+	      "eventUrl": "localhost:9053",
+	      "grpcOptions": {
+      	        "grpc.ssl_target_name_override": "peer2.org1.dz",
+	        "grpc.http2.keepalive_time": 15
+	      },
+	      "tlsCACerts": {
+	        "path": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/peers/peer2.org1.dz/msp/tlscacerts/tlsca.org1.dz-cert.pem"
+}},
+    "peer3.org1.dz": {
+	      "url": "localhost:10051",
+	      "eventUrl": "localhost:10053",
+	      "grpcOptions": {
+      	        "grpc.ssl_target_name_override": "peer3.org1.dz",
+	        "grpc.http2.keepalive_time": 15
+	      },
+	      "tlsCACerts": {
+	        "path": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/peers/peer3.org1.dz/msp/tlscacerts/tlsca.org1.dz-cert.pem"
+}}
+    },
+"certificateAuthorities": {
+
+    "ca.org1.dz": {
+      "url": "https://localhost:8054",
+      "grpcOptions": {
+        "verify": true
+      },
+      "tlsCACerts": {
+        "path": "/home/Adel/Desktop/PFE/Two_Chain_Network_Template/pfe-project/crypto-config/peerOrganizations/org1.dz/ca/ca.org1.dz-cert.pem"
+      },
+      "registrar": [
+        {
+          "enrollId": "admin",
+          "enrollSecret": "adminpw"
+        }
+      ]
+    }
+  }
+}
